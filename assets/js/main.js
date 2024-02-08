@@ -1,8 +1,7 @@
-const relogio = document.querySelector(".relogio");
-let segundos = 0;
-let timer;
-
 function relogio() {
+  const relogio = document.querySelector(".relogio");
+  let segundos = 0;
+  let timer;
   document.addEventListener("click", (e) => {
     const elemento = e.target;
     if (elemento.classList.contains("iniciar")) {
@@ -23,21 +22,20 @@ function relogio() {
       relogio.classList.remove("pausado");
     }
   });
-}
+  function criaHoraDosSegundos(segundos) {
+    const data = new Date(segundos * 1000);
+    return data.toLocaleTimeString("pt-BR", {
+      hour12: false,
+      timeZone: "UTC",
+    });
+  }
 
-function criaHoraDosSegundos(segundos) {
-  const data = new Date(segundos * 1000);
-  return data.toLocaleTimeString("pt-BR", {
-    hour12: false,
-    timeZone: "UTC",
-  });
-}
-
-function iniciaRelogio() {
-  timer = setInterval(() => {
-    segundos++;
-    relogio.innerHTML = criaHoraDosSegundos(segundos);
-  }, 1000);
+  function iniciaRelogio() {
+    timer = setInterval(() => {
+      segundos++;
+      relogio.innerHTML = criaHoraDosSegundos(segundos);
+    }, 1000);
+  }
 }
 
 relogio();
